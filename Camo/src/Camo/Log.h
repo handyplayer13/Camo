@@ -22,15 +22,15 @@ namespace Camo {
 }
 
 // Core log macros
-#define CM_CORE_TRACE(...) ::Camo::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define CM_CORE_INFO(...)  ::Camo::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define CM_CORE_WARN(...)  ::Camo::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define CM_CORE_ERROR(...) ::Camo::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define CM_CORE_FATAL(...) ::Camo::Log::GetCoreLogger()->fatal(__VA_ARGS__)
+#define CM_CORE_TRACE(...)    ::Camo::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define CM_CORE_INFO(...)     ::Camo::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define CM_CORE_WARN(...)     ::Camo::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define CM_CORE_ERROR(...)    ::Camo::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define CM_CORE_CRITICAL(...) ::Camo::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client log macros
-#define CM_TRACE(...)      ::Camo::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define CM_INFO(...)       ::Camo::Log::GetClientLogger()->info(__VA_ARGS__)
-#define CM_WARN(...)       ::Camo::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define CM_ERROR(...)      ::Camo::Log::GetClientLogger()->error(__VA_ARGS__)
-#define CM_FATAL(...)      ::Camo::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define CM_TRACE(...)         ::Camo::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define CM_INFO(...)          ::Camo::Log::GetClientLogger()->info(__VA_ARGS__)
+#define CM_WARN(...)          ::Camo::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define CM_ERROR(...)         ::Camo::Log::GetClientLogger()->error(__VA_ARGS__)
+#define CM_CRITICAL(...)      ::Camo::Log::GetClientLogger()->critical(__VA_ARGS__)

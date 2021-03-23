@@ -14,7 +14,7 @@ namespace Camo {
 
 	void Application::Run()
 	{
-		while (true);
+		// do something...
 	}
 
 }
