@@ -21,12 +21,25 @@ project "Camo"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.cpp"
 	}
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/vendor/sfml/include"
+	}
+
+	libdirs
+	{
+		"%{prj.name}/vendor/sfml/lib"
+	}
+
+	links
+	{
+		"sfml-graphics.lib",
+		"sfml-window.lib",
+		"sfml-system.lib"
 	}
 
 	filter "system:windows"
@@ -42,7 +55,8 @@ project "Camo"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Game")
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Game"),
+			("{COPY} vendor/sfml/bin ../bin/" .. outputdir .. "/Game")
 		}
 
 	filter "configurations:Debug"
