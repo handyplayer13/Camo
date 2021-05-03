@@ -35,13 +35,6 @@ project "Camo"
 		"%{prj.name}/vendor/sfml/lib"
 	}
 
-	links
-	{
-		"sfml-graphics.lib",
-		"sfml-window.lib",
-		"sfml-system.lib"
-	}
-
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
@@ -63,13 +56,34 @@ project "Camo"
 		defines "CM_DEBUG"
 		symbols "On"
 
+		links
+		{
+			"sfml-graphics-d.lib",
+			"sfml-window-d.lib",
+			"sfml-system-d.lib"
+		}
+
 	filter "configurations:Release"
 		defines "CM_RELEASE"
 		optimize "On"
 
+		links
+		{
+			"sfml-graphics.lib",
+			"sfml-window.lib",
+			"sfml-system.lib"
+		}
+
 	filter "configurations:Dist"
 		defines "CM_DIST"
 		optimize "On"
+
+		links
+		{
+			"sfml-graphics.lib",
+			"sfml-window.lib",
+			"sfml-system.lib"
+		}
 
 project "Game"
 	location "Game"
@@ -99,9 +113,6 @@ project "Game"
 
 	links
 	{
-		"sfml-graphics.lib",
-		"sfml-window.lib",
-		"sfml-system.lib",
 		"Camo"
 	}
 
@@ -119,10 +130,31 @@ project "Game"
 		defines "CM_DEBUG"
 		symbols "On"
 
+		links
+		{
+			"sfml-graphics-d.lib",
+			"sfml-window-d.lib",
+			"sfml-system-d.lib"
+		}
+
 	filter "configurations:Release"
 		defines "CM_RELEASE"
 		optimize "On"
 
+		links
+		{
+			"sfml-graphics.lib",
+			"sfml-window.lib",
+			"sfml-system.lib"
+		}
+
 	filter "configurations:Dist"
 		defines "CM_DIST"
 		optimize "On"
+
+		links
+		{
+			"sfml-graphics.lib",
+			"sfml-window.lib",
+			"sfml-system.lib"
+		}
