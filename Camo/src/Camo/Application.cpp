@@ -53,9 +53,9 @@ namespace Camo {
             // render
             if (accumulatorRender >= m_deltaTimeRender)
             {
-                window.Clear();
-                OnRender(window);
-                window.Display();
+                State state;
+                OnRender(state);
+                state.Draw(window);
 
                 accumulatorRender = 0;
             }

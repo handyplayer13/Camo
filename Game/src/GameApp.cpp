@@ -10,7 +10,7 @@ public:
 		: Application(windowWidth, windowHeight, windowTitle)
 	{
 		// set delta times
-		SetDeltaTimeUpdate(1 / 60.0);
+		SetDeltaTimeUpdate(1 / 10.0);
 		SetDeltaTimeRender(1 / 60.0);
 
 		// initialize rectangle
@@ -50,7 +50,7 @@ public:
 		m_counter += 2 * deltaTime;
 	}
 
-	void OnRender(Camo::Window& window)
+	void OnRender(Camo::State& state)
 	{
 		// debug render fps
 		auto newRenderTime = std::chrono::system_clock::now();
@@ -59,10 +59,10 @@ public:
 		m_lastRenderTime = newRenderTime;
 		m_frameTimeRenderText.SetString("Render FPS: " + std::to_string(1 / actualRenderFrameTime));
 
-		// draw calls
-		window.Draw(m_frameTimeUpdateText);
-		window.Draw(m_frameTimeRenderText);
-		window.Draw(m_rectangle);
+		// adding drawables to the state makes them being rendered
+		state.Add(m_frameTimeUpdateText);
+		state.Add(m_frameTimeRenderText);
+		state.Add(m_rectangle);
 	}
 
 private:

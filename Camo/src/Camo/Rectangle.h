@@ -10,14 +10,17 @@ namespace Camo {
 	class CAMO_API Rectangle : public Drawable
 	{
 	public:
-		void SetPosition(float x, float y);
+		float GetPositionX() const override;
+		float GetPositionY() const override;
+		void SetPosition(float x, float y) override;
+
 		void SetRotation(float angle);
 		void SetSize(float width, float height);
 		void SetFillColor(uint8_t r, uint8_t g, uint8_t b);
 
-		sf::Drawable& GetInternal() override;
-
 	private:
+		sf::Drawable& GetInternal() override; // prohibit access in game
+
 		sf::RectangleShape m_rectangleShape;
 	};
 

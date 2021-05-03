@@ -12,14 +12,17 @@ namespace Camo {
 	class CAMO_API Text : public Drawable
 	{
 	public:
+		float GetPositionX() const override;
+		float GetPositionY() const override;
+		void SetPosition(float x, float y) override;
+		sf::Drawable& GetInternal() override;
+
 		void SetFont(const char* fontFile);
 		void SetString(const char* string);
 		void SetString(const std::string& string);
-		void SetPosition(float x, float y);
 		void SetSize(unsigned int size);
 		void SetFillColor(uint8_t r, uint8_t g, uint8_t b);
 
-		sf::Drawable& GetInternal() override;
 
 	private:
 		sf::Text m_text;

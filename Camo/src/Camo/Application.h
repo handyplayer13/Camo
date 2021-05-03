@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Window.h"
+#include "State.h"
 
 namespace Camo {
 
@@ -16,7 +17,7 @@ namespace Camo {
 		// Updating calculations, to be defined in client 
 		virtual void OnUpdate(double deltaTime) = 0;
 		// Rendering state, to be defined in client 
-		virtual void OnRender(Window& window) = 0;
+		virtual void OnRender(State& state) = 0;
 
 	protected:
 		void SetDeltaTimeUpdate(double deltaTime);

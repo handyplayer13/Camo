@@ -2,9 +2,24 @@
 
 namespace Camo {
 
+	float Rectangle::GetPositionX() const
+	{
+		return m_rectangleShape.getPosition().x;
+	}
+
+	float Rectangle::GetPositionY() const
+	{
+		return m_rectangleShape.getPosition().y;
+	}
+
 	void Rectangle::SetPosition(float x, float y)
 	{
 		m_rectangleShape.setPosition(x, y);
+	}
+
+	sf::Drawable& Rectangle::GetInternal()
+	{
+		return m_rectangleShape;
 	}
 
 	void Rectangle::SetRotation(float angle)
@@ -20,11 +35,6 @@ namespace Camo {
 	void Rectangle::SetFillColor(uint8_t r, uint8_t g, uint8_t b)
 	{
 		m_rectangleShape.setFillColor(sf::Color(r, g, b));
-	}
-
-	sf::Drawable& Rectangle::GetInternal()
-	{
-		return m_rectangleShape;
 	}
 
 }
