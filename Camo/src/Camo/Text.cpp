@@ -17,6 +17,11 @@ namespace Camo {
 		m_text.setPosition(x, y);
 	}
 
+	Drawable* Text::Clone() const
+	{
+		return new Text(*this);
+	}
+
 	sf::Drawable& Text::GetInternal()
 	{
 		return m_text;

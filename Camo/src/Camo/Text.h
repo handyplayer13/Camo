@@ -15,7 +15,6 @@ namespace Camo {
 		float GetPositionX() const override;
 		float GetPositionY() const override;
 		void SetPosition(float x, float y) override;
-		sf::Drawable& GetInternal() override;
 
 		void SetFont(const char* fontFile);
 		void SetString(const char* string);
@@ -23,8 +22,10 @@ namespace Camo {
 		void SetSize(unsigned int size);
 		void SetFillColor(uint8_t r, uint8_t g, uint8_t b);
 
-
 	private:
+		Drawable* Clone() const override;
+		sf::Drawable& GetInternal() override;
+
 		sf::Text m_text;
 		sf::Font m_font;
 	};

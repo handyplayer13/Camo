@@ -39,6 +39,14 @@ namespace Camo {
 		m_renderWindow.draw(drawable.GetInternal());
 	}
 
+	void Window::Draw(State& state)
+	{
+		for (int i = 0; i < state.Size(); i++)
+		{
+			Draw(state.Get(i));
+		}
+	}
+
 	void Window::Display()
 	{
 		m_renderWindow.display();

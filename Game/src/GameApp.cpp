@@ -35,7 +35,7 @@ public:
 		
 	}
 
-	void OnUpdate(double deltaTime)
+	Camo::State OnUpdate(double deltaTime)
 	{
 		// debug update fps
 		auto newUpdateTime = std::chrono::system_clock::now();
@@ -48,9 +48,17 @@ public:
 		double offsetX = std::sin(m_counter) * 350;
 		m_rectangle.SetPosition(350 + offsetX, 275);
 		m_counter += 2 * deltaTime;
+
+		// add drawables to the state
+		Camo::State state;
+		state.Add(m_frameTimeUpdateText);
+		state.Add(m_frameTimeRenderText);
+		state.Add(m_rectangle);
+
+		return state;
 	}
 
-	void OnRender(Camo::State& state)
+	void OnRender(Camo::State& state, Camo::Window& window)
 	{
 		// debug render fps
 		auto newRenderTime = std::chrono::system_clock::now();
@@ -59,10 +67,10 @@ public:
 		m_lastRenderTime = newRenderTime;
 		m_frameTimeRenderText.SetString("Render FPS: " + std::to_string(1 / actualRenderFrameTime));
 
-		// adding drawables to the state makes them being rendered
-		state.Add(m_frameTimeUpdateText);
-		state.Add(m_frameTimeRenderText);
-		state.Add(m_rectangle);
+		// render state
+		window.Clear();
+		window.Draw(state);
+		window.Display();
 	}
 
 private:

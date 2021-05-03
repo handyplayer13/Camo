@@ -2,12 +2,13 @@
 
 #include "Core.h"
 #include "Drawable.h"
+#include "State.h"
 
 #include <SFML/Graphics.hpp>
 
 namespace Camo {
 
-	class Window
+	class CAMO_API Window
 	{
 	public:
 		Window(unsigned int width, unsigned int height, const char* title);
@@ -16,6 +17,7 @@ namespace Camo {
 		void Close();
 		void Clear();
 		void Draw(Drawable& drawable);
+		void Draw(State& state);
 		void Display();
 
 	private:

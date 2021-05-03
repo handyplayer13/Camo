@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Window.h"
+#include "Log.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -26,6 +27,9 @@ namespace Camo {
         double accumulatorRender = 0.0;
         auto currentTime = std::chrono::system_clock::now();
 
+        State previousState;
+        State currentState;
+
         // app runs as long as the window is open
         while (window.IsOpen())
         {
@@ -46,16 +50,29 @@ namespace Camo {
             // update
             while (accumulatorUpdate >= m_deltaTimeUpdate)
             {
-                OnUpdate(m_deltaTimeUpdate);
+                previousState = currentState;
+                if (&previousState == &currentState)
+                {
+                    CM_CORE_TRACE("BAD");
+                }
+                if (previousState.Size() > 0 && currentState.Size() > 0 && &previousState.Get(0) == &currentState.Get(0))
+                {
+                    CM_CORE_TRACE("BAD");
+                }
+                currentState = OnUpdate(m_deltaTimeUpdate);
+
                 accumulatorUpdate -= m_deltaTimeUpdate;
             }
+
+            // in the first frame the previous state might not be initialized
+            if (previousState.Size() == 0) previousState = currentState;
 
             // render
             if (accumulatorRender >= m_deltaTimeRender)
             {
-                State state;
-                OnRender(state);
-                state.Draw(window);
+                const double alpha = accumulatorUpdate / m_deltaTimeUpdate;
+                State state = State::Interpolate(currentState, previousState, alpha);
+                OnRender(state, window);
 
                 accumulatorRender = 0;
             }

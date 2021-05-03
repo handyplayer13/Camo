@@ -14,10 +14,10 @@ namespace Camo {
 
 		void Run();
 
-		// Updating calculations, to be defined in client 
-		virtual void OnUpdate(double deltaTime) = 0;
-		// Rendering state, to be defined in client 
-		virtual void OnRender(State& state) = 0;
+		// Updating simulation using deltaTime, to be defined in client 
+		virtual State OnUpdate(double deltaTime) = 0;
+		// Rendering state to window, to be defined in client 
+		virtual void OnRender(State& state, Window& window) = 0;
 
 	protected:
 		void SetDeltaTimeUpdate(double deltaTime);
