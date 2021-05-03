@@ -1,6 +1,5 @@
 #include "Application.h"
 #include "Window.h"
-#include "Log.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -51,14 +50,6 @@ namespace Camo {
             while (accumulatorUpdate >= m_deltaTimeUpdate)
             {
                 previousState = currentState;
-                if (&previousState == &currentState)
-                {
-                    CM_CORE_TRACE("BAD");
-                }
-                if (previousState.Size() > 0 && currentState.Size() > 0 && &previousState.Get(0) == &currentState.Get(0))
-                {
-                    CM_CORE_TRACE("BAD");
-                }
                 currentState = OnUpdate(m_deltaTimeUpdate);
 
                 accumulatorUpdate -= m_deltaTimeUpdate;

@@ -10,9 +10,6 @@ namespace Camo {
 	class State
 	{
 	public:
-
-		State& operator=(const State& other);
-
 		CAMO_API void Add(Drawable& drawable);
 		CAMO_API Drawable& Get(int index);
 		CAMO_API int Size() const;

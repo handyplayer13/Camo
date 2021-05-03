@@ -10,7 +10,7 @@ public:
 		: Application(windowWidth, windowHeight, windowTitle)
 	{
 		// set delta times
-		SetDeltaTimeUpdate(1 / 10.0);
+		SetDeltaTimeUpdate(1 / 60.0);
 		SetDeltaTimeRender(1 / 60.0);
 
 		// initialize rectangle

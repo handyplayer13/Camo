@@ -19,7 +19,6 @@ namespace Camo {
 		void SetFillColor(uint8_t r, uint8_t g, uint8_t b);
 
 	private:
-		Drawable* Clone() const override;
 		sf::Drawable& GetInternal() override; // prohibit access in game
 
 		sf::RectangleShape m_rectangleShape;
