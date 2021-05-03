@@ -88,11 +88,20 @@ project "Game"
 	includedirs
 	{
 		"Camo/vendor/spdlog/include",
+		"Camo/vendor/sfml/include",
 		"Camo/src"
+	}
+
+	libdirs
+	{
+		"Camo/vendor/sfml/lib"
 	}
 
 	links
 	{
+		"sfml-graphics.lib",
+		"sfml-window.lib",
+		"sfml-system.lib",
 		"Camo"
 	}
 
