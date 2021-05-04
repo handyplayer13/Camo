@@ -51,22 +51,27 @@ namespace Camo {
             {
                 previousState.Clear();
                 previousState = currentState;
-
                 currentState = OnUpdate(m_deltaTimeUpdate);
 
                 accumulatorUpdate -= m_deltaTimeUpdate;
             }
 
-            // in the first frame the previous state might not be initialized
-            if (previousState.Size() == 0) previousState = currentState;
-
             // render
             if (accumulatorRender >= m_deltaTimeRender)
             {
-                const double alpha = accumulatorUpdate / m_deltaTimeUpdate;
-                State state = State::Interpolate(currentState, previousState, alpha);
-                OnRender(state, window);
-                state.Clear();
+                if (previousState.Size() > 0)
+                {
+                    // interpolate between previous and current state
+                    const double alpha = accumulatorUpdate / m_deltaTimeUpdate;
+                    State state = State::Interpolate(currentState, previousState, alpha);
+                    OnRender(state, window);
+                    state.Clear();
+                }
+                else
+                {
+                    // just render current frame if previous state is not initialized
+                    OnRender(currentState, window);
+                }
 
                 accumulatorRender = 0;
             }
