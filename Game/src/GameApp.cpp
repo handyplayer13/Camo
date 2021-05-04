@@ -10,8 +10,8 @@ public:
 		: Application(windowWidth, windowHeight, windowTitle)
 	{
 		// set delta times
-		SetDeltaTimeUpdate(1 / 10.0);
-		SetDeltaTimeRender(1 / 60.0);
+		SetDeltaTimeUpdate(1 / 30.0);
+		SetDeltaTimeRender(1 / 144.0);
 
 		// initialize rectangle
 		m_rectangle.SetPosition(350, 275);
@@ -21,11 +21,19 @@ public:
 		// initialize texts
 		m_frameTimeUpdateText.SetFont("fonts/JetBrainsMono.ttf");
 		m_frameTimeUpdateText.SetPosition(20, 20);
+		m_frameTimeUpdateText.SetFillColor(205, 205, 205);
 		m_frameTimeUpdateText.SetSize(25);
 
 		m_frameTimeRenderText.SetFont("fonts/JetBrainsMono.ttf");
 		m_frameTimeRenderText.SetPosition(20, 50);
+		m_frameTimeRenderText.SetFillColor(205, 205, 205);
 		m_frameTimeRenderText.SetSize(25);
+
+		m_controlsText.SetFont("fonts/JetBrainsMono.ttf");
+		m_controlsText.SetString("W/Up   - Move Up\nS/Down - Move Down");
+		m_controlsText.SetPosition(windowWidth - 200, 20);
+		m_controlsText.SetFillColor(205, 205, 205);
+		m_controlsText.SetSize(15);
 
 		CM_INFO("Game initialized");
 	}
@@ -40,17 +48,24 @@ public:
 		// debug update fps
 		m_frameTimeUpdateText.SetString("Update FPS: " + std::to_string(calculateFPS(m_lastUpdateTime)));
 
-		// move rectangle
-		double offsetX = std::sin(m_counter) * 350;
-		m_rectangle.SetPosition(350 + offsetX, 275);
+		// move rectangle horizontally with sinus
+		m_rectangle.SetPosition(350 + std::sin(m_counter) * 350, m_rectangle.GetPositionY());
 		m_counter += 2 * deltaTime;
 
+		// move rectangle vertically with input
+		if (Camo::Input::IsWKeyPressed() || Camo::Input::IsArrowUpKeyPressed()) m_rectangle.Move(0, -200 * deltaTime);
+		if (Camo::Input::IsSKeyPressed() || Camo::Input::IsArrowDownKeyPressed()) m_rectangle.Move(0, 200 * deltaTime);
+
+		// check bounds
+		if (m_rectangle.GetPositionY() < 0) m_rectangle.SetPosition(m_rectangle.GetPositionX(), 0);
+		if (m_rectangle.GetPositionY() > m_windowHeight - 50) m_rectangle.SetPosition(m_rectangle.GetPositionX(), m_windowHeight - 50);
+		
 		// add drawables to the state
 		Camo::State state;
-
+		state.Add(m_rectangle);
 		state.Add(m_frameTimeUpdateText);
 		state.Add(m_frameTimeRenderText);
-		state.Add(m_rectangle);
+		state.Add(m_controlsText);
 
 		return state;
 	}
@@ -80,17 +95,12 @@ private:
 	Camo::Rectangle m_rectangle;
 	Camo::Text m_frameTimeUpdateText;
 	Camo::Text m_frameTimeRenderText;
+	Camo::Text m_controlsText;
 	std::chrono::system_clock::time_point m_lastUpdateTime;
 	std::chrono::system_clock::time_point m_lastRenderTime;
 };
 
 Camo::Application* Camo::CreateApplication()
 {
-	//CM_TRACE("Trace demo logging");
-	//CM_INFO("Info demo logging");
-	//CM_WARN("Warn demo logging");
-	//CM_ERROR("Error demo logging");
-	//CM_CRITICAL("Critical demo logging");
-	
 	return new Game(800, 600, "My Game | Camo");
 }

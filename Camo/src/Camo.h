@@ -7,6 +7,7 @@
 #include "Camo/State.h"
 #include "Camo/Rectangle.h"
 #include "Camo/Text.h"
+#include "Camo/Input.h"
 
 // --- Entry Point ---
 #include "Camo/EntryPoint.h"

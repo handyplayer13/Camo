@@ -16,13 +16,14 @@ namespace Camo {
 		float GetPositionY() const override;
 		void SetPosition(float x, float y) override;
 
+		void Move(float offsetX, float offsetY);
 		void SetRotation(float angle);
 		void SetSize(float width, float height);
 		void SetFillColor(uint8_t r, uint8_t g, uint8_t b);
 
 	private:
 		// prohibit access in game
-		Drawable* Clone() const override;
+		Drawable* Clone() const override; // allocates memory on the heap
 		sf::Drawable& GetInternal() override;
 
 		sf::RectangleShape m_rectangleShape;

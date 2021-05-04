@@ -27,6 +27,11 @@ namespace Camo {
 		return m_rectangleShape;
 	}
 
+	void Rectangle::Move(float offsetX, float offsetY)
+	{
+		m_rectangleShape.move(sf::Vector2f(offsetX, offsetY));
+	}
+
 	void Rectangle::SetRotation(float angle)
 	{
 		m_rectangleShape.setRotation(angle);

@@ -23,11 +23,11 @@ namespace Camo {
 		void SetDeltaTimeUpdate(double deltaTime);
 		void SetDeltaTimeRender(double deltaTime);
 
-	private:
 		unsigned int m_windowWidth;
 		unsigned int m_windowHeight;
 		const char* m_windowTitle;
 
+	private:
 		// default values for delta times
 		double m_deltaTimeUpdate = 1 / 60.0;
 		double m_deltaTimeRender = 1 / 60.0;

@@ -26,7 +26,7 @@ namespace Camo {
 
 	private:
 		// prohibit access in game
-		Drawable* Clone() const override;
+		Drawable* Clone() const override; // allocates memory on the heap
 		sf::Drawable& GetInternal() override;
 
 		sf::Text m_text;
