@@ -49,7 +49,10 @@ namespace Camo {
             // update
             while (accumulatorUpdate >= m_deltaTimeUpdate)
             {
+                previousState.Clear();
                 previousState = currentState;
+
+                currentState.Clear();
                 currentState = OnUpdate(m_deltaTimeUpdate);
 
                 accumulatorUpdate -= m_deltaTimeUpdate;
@@ -64,6 +67,7 @@ namespace Camo {
                 const double alpha = accumulatorUpdate / m_deltaTimeUpdate;
                 State state = State::Interpolate(currentState, previousState, alpha);
                 OnRender(state, window);
+                state.Clear();
 
                 accumulatorRender = 0;
             }

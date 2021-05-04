@@ -17,6 +17,11 @@ namespace Camo {
 		m_rectangleShape.setPosition(x, y);
 	}
 
+	Drawable* Rectangle::Clone() const
+	{
+		return new Rectangle(*this);
+	}
+
 	sf::Drawable& Rectangle::GetInternal()
 	{
 		return m_rectangleShape;
