@@ -61,7 +61,7 @@ public:
 		m_frameTimeRenderText.SetString("Render FPS: " + std::to_string(calculateFPS(m_lastRenderTime)));
 
 		// render state
-		window.Clear();
+		window.Clear(50, 50, 50);
 		window.Draw(state);
 		window.Display();
 	}

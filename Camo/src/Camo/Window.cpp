@@ -34,6 +34,11 @@ namespace Camo {
 		m_renderWindow.clear();
 	}
 
+	void Window::Clear(uint8_t r, uint8_t g, uint8_t b)
+	{
+		m_renderWindow.clear(sf::Color(r, g, b));
+	}
+
 	void Window::Draw(Drawable& drawable)
 	{
 		m_renderWindow.draw(drawable.GetInternal());

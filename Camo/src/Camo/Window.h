@@ -16,6 +16,7 @@ namespace Camo {
 		bool CloseRequested();
 		void Close();
 		void Clear();
+		void Clear(uint8_t r, uint8_t g, uint8_t b);
 		void Draw(Drawable& drawable);
 		void Draw(State& state);
 		void Display();
