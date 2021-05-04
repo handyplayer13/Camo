@@ -9,6 +9,8 @@ namespace Camo {
 	class Drawable
 	{
 	public:
+		virtual ~Drawable() = default;
+
 		virtual float GetPositionX() const = 0;
 		virtual float GetPositionY() const = 0;
 		virtual void SetPosition(float x, float y) = 0;

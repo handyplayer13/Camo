@@ -12,6 +12,8 @@ namespace Camo {
 	class CAMO_API Text : public Drawable
 	{
 	public:
+		virtual ~Text() = default;
+
 		float GetPositionX() const override;
 		float GetPositionY() const override;
 		void SetPosition(float x, float y) override;
@@ -23,8 +25,9 @@ namespace Camo {
 		void SetFillColor(uint8_t r, uint8_t g, uint8_t b);
 
 	private:
+		// prohibit access in game
 		Drawable* Clone() const override;
-		sf::Drawable& GetInternal() override; // prohibit access in game
+		sf::Drawable& GetInternal() override;
 
 		sf::Text m_text;
 		sf::Font m_font;

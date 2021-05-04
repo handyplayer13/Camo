@@ -52,7 +52,6 @@ namespace Camo {
                 previousState.Clear();
                 previousState = currentState;
 
-                currentState.Clear();
                 currentState = OnUpdate(m_deltaTimeUpdate);
 
                 accumulatorUpdate -= m_deltaTimeUpdate;
