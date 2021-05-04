@@ -10,7 +10,7 @@ public:
 		: Application(windowWidth, windowHeight, windowTitle)
 	{
 		// set delta times
-		SetDeltaTimeUpdate(1 / 60.0);
+		SetDeltaTimeUpdate(1 / 10.0);
 		SetDeltaTimeRender(1 / 60.0);
 
 		// initialize rectangle
@@ -38,11 +38,7 @@ public:
 	Camo::State OnUpdate(double deltaTime)
 	{
 		// debug update fps
-		auto newUpdateTime = std::chrono::system_clock::now();
-		std::chrono::duration<double> elapsedUpdateTime = newUpdateTime - m_lastUpdateTime;
-		double actualUpdateFrameTime = elapsedUpdateTime.count();
-		m_lastUpdateTime = newUpdateTime;
-		m_frameTimeUpdateText.SetString("Update FPS: " + std::to_string(1 / actualUpdateFrameTime));
+		m_frameTimeUpdateText.SetString("Update FPS: " + std::to_string(calculateFPS(m_lastUpdateTime)));
 
 		// move rectangle
 		double offsetX = std::sin(m_counter) * 350;
@@ -51,6 +47,7 @@ public:
 
 		// add drawables to the state
 		Camo::State state;
+
 		state.Add(m_frameTimeUpdateText);
 		state.Add(m_frameTimeRenderText);
 		state.Add(m_rectangle);
@@ -61,11 +58,7 @@ public:
 	void OnRender(Camo::State& state, Camo::Window& window)
 	{
 		// debug render fps
-		auto newRenderTime = std::chrono::system_clock::now();
-		std::chrono::duration<double> elapsedRenderTime = newRenderTime - m_lastRenderTime;
-		double actualRenderFrameTime = elapsedRenderTime.count();
-		m_lastRenderTime = newRenderTime;
-		m_frameTimeRenderText.SetString("Render FPS: " + std::to_string(1 / actualRenderFrameTime));
+		m_frameTimeRenderText.SetString("Render FPS: " + std::to_string(calculateFPS(m_lastRenderTime)));
 
 		// render state
 		window.Clear();
@@ -74,6 +67,15 @@ public:
 	}
 
 private:
+	int calculateFPS(std::chrono::system_clock::time_point& lastTime)
+	{
+		auto newTime = std::chrono::system_clock::now();
+		std::chrono::duration<double> elapsedTime = newTime - lastTime;
+		double actualFrameTime = elapsedTime.count();
+		lastTime = newTime;
+		return std::round(1 / actualFrameTime);
+	}
+
 	double m_counter = 0;
 	Camo::Rectangle m_rectangle;
 	Camo::Text m_frameTimeUpdateText;
